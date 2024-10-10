@@ -1,6 +1,28 @@
 [package]
 name = "rlabel"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 [dependencies]
+thiserror.workspace = true
+chrono.workspace = true
+
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+serde_yaml = "0.9"
+indexmap = { version = "2.2", features = ["serde"] }
+imagesize = "0.13.0"
+
+[workspace]
+members = ["bin/labelme2coco","bin/labelme2yolo"]
+resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1"
+thiserror = "1"
+chrono = "0.4.23"
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
